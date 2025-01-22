@@ -1,11 +1,11 @@
 using Application.Users.CreateUser;
+using AutoMapper;
 using Common.Security;
 using Domain.Entities;
 using Domain.Repositories;
-using Unit.Domain;
-using AutoMapper;
 using FluentAssertions;
 using NSubstitute;
+using Unit.Domain;
 using Xunit;
 
 namespace Unit.Application;

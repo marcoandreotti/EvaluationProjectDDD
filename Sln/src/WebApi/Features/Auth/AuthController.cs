@@ -1,9 +1,9 @@
+using Application.Auth.AuthenticateUser;
+using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using AutoMapper;
 using WebApi.Common;
 using WebApi.Features.Auth.AuthenticateUserFeature;
-using Application.Auth.AuthenticateUser;
 
 namespace WebApi.Features.Auth;
 

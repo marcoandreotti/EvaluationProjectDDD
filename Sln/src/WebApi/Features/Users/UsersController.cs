@@ -1,13 +1,13 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Mvc;
+﻿using Application.Users.CreateUser;
+using Application.Users.DeleteUser;
+using Application.Users.GetUser;
 using AutoMapper;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using WebApi.Common;
 using WebApi.Features.Users.CreateUser;
-using WebApi.Features.Users.GetUser;
 using WebApi.Features.Users.DeleteUser;
-using Application.Users.CreateUser;
-using Application.Users.GetUser;
-using Application.Users.DeleteUser;
+using WebApi.Features.Users.GetUser;
 
 namespace WebApi.Features.Users;
 

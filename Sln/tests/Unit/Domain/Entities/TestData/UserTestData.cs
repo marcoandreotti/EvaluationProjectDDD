@@ -1,6 +1,6 @@
+using Bogus;
 using Domain.Entities;
 using Domain.Enums;
-using Bogus;
 
 namespace Unit.Domain.Entities.TestData;
 

@@ -1,7 +1,7 @@
 ﻿using Common.Validation;
-using WebApi.Common;
 using FluentValidation;
 using System.Text.Json;
+using WebApi.Common;
 
 namespace WebApi.Middleware
 {

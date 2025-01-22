@@ -1,7 +1,7 @@
 using AutoMapper;
-using MediatR;
-using FluentValidation;
 using Domain.Repositories;
+using FluentValidation;
+using MediatR;
 
 namespace Application.Users.GetUser;
 

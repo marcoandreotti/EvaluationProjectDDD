@@ -1,6 +1,6 @@
 using Application.Users.CreateUser;
-using Domain.Enums;
 using Bogus;
+using Domain.Enums;
 
 namespace Unit.Domain;
 

@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using MediatR;
-using FluentValidation;
-using Domain.Repositories;
-using Domain.Entities;
 using Common.Security;
+using Domain.Entities;
+using Domain.Repositories;
+using FluentValidation;
+using MediatR;
 
 namespace Application.Users.CreateUser;
 
