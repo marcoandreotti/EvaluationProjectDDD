@@ -4,11 +4,11 @@ using Common.Logging;
 using Common.Security;
 using Common.Validation;
 using IoC;
-using ORM;
-using WebApi.Middleware;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using ORM;
 using Serilog;
+using WebApi.Middleware;
 
 namespace WebApi;
 

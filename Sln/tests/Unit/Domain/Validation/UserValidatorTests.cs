@@ -1,7 +1,7 @@
 using Domain.Enums;
 using Domain.Validation;
-using Unit.Domain.Entities.TestData;
 using FluentValidation.TestHelper;
+using Unit.Domain.Entities.TestData;
 using Xunit;
 
 namespace Unit.Domain.Validation;

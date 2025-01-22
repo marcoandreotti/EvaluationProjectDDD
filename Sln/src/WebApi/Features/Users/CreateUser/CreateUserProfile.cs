@@ -1,5 +1,5 @@
-using AutoMapper;
 using Application.Users.CreateUser;
+using AutoMapper;
 
 namespace WebApi.Features.Users.CreateUser;
 

@@ -1,7 +1,7 @@
 using Domain.Enums;
 using Domain.Specifications;
-using Unit.Domain.Specifications.TestData;
 using FluentAssertions;
+using Unit.Domain.Specifications.TestData;
 using Xunit;
 
 namespace Unit.Domain.Specifications
