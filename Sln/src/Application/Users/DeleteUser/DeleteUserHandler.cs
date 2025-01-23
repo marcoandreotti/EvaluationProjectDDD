@@ -1,13 +1,14 @@
+using Application.Common;
+using AutoMapper;
 using Domain.Repositories;
 using FluentValidation;
-using MediatR;
 
 namespace Application.Users.DeleteUser;
 
 /// <summary>
-/// Handler for processing DeleteUserCommand requests
+/// Handler for processing DeleteUserCommand requests inheriting from generic handler
 /// </summary>
-public class DeleteUserHandler : IRequestHandler<DeleteUserCommand, DeleteUserResponse>
+public class DeleteUserHandler : BaseHandler<DeleteUserCommand, DeleteUserResponse>
 {
     private readonly IUserRepository _userRepository;
 
@@ -16,8 +17,7 @@ public class DeleteUserHandler : IRequestHandler<DeleteUserCommand, DeleteUserRe
     /// </summary>
     /// <param name="userRepository">The user repository</param>
     /// <param name="validator">The validator for DeleteUserCommand</param>
-    public DeleteUserHandler(
-        IUserRepository userRepository)
+    public DeleteUserHandler(IUserRepository userRepository, IMapper mapper) : base(mapper)
     {
         _userRepository = userRepository;
     }
@@ -28,7 +28,7 @@ public class DeleteUserHandler : IRequestHandler<DeleteUserCommand, DeleteUserRe
     /// <param name="request">The DeleteUser command</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>The result of the delete operation</returns>
-    public async Task<DeleteUserResponse> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
+    protected override async Task<DeleteUserResponse> HandleRequest(DeleteUserCommand request, CancellationToken cancellationToken)
     {
         var validator = new DeleteUserValidator();
         var validationResult = await validator.ValidateAsync(request, cancellationToken);

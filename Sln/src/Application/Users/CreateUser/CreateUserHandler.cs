@@ -1,16 +1,16 @@
-﻿using AutoMapper;
+﻿using Application.Common;
+using AutoMapper;
 using Common.Security;
 using Domain.Entities;
 using Domain.Repositories;
 using FluentValidation;
-using MediatR;
 
 namespace Application.Users.CreateUser;
 
 /// <summary>
-/// Handler for processing CreateUserCommand requests
+/// Handler for processing CreateUserCommand requests inheriting from generic handler
 /// </summary>
-public class CreateUserHandler : IRequestHandler<CreateUserCommand, CreateUserResult>
+public class CreateUserHandler : BaseHandler<CreateUserCommand, CreateUserResult>
 {
     private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
@@ -22,7 +22,7 @@ public class CreateUserHandler : IRequestHandler<CreateUserCommand, CreateUserRe
     /// <param name="userRepository">The user repository</param>
     /// <param name="mapper">The AutoMapper instance</param>
     /// <param name="validator">The validator for CreateUserCommand</param>
-    public CreateUserHandler(IUserRepository userRepository, IMapper mapper, IPasswordHasher passwordHasher)
+    public CreateUserHandler(IUserRepository userRepository, IMapper mapper, IPasswordHasher passwordHasher) : base(mapper)
     {
         _userRepository = userRepository;
         _mapper = mapper;
@@ -35,7 +35,7 @@ public class CreateUserHandler : IRequestHandler<CreateUserCommand, CreateUserRe
     /// <param name="command">The CreateUser command</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>The created user details</returns>
-    public async Task<CreateUserResult> Handle(CreateUserCommand command, CancellationToken cancellationToken)
+    protected override async Task<CreateUserResult> HandleRequest(CreateUserCommand command, CancellationToken cancellationToken)
     {
         var validator = new CreateUserCommandValidator();
         var validationResult = await validator.ValidateAsync(command, cancellationToken);
@@ -50,7 +50,7 @@ public class CreateUserHandler : IRequestHandler<CreateUserCommand, CreateUserRe
         var user = _mapper.Map<User>(command);
         user.Password = _passwordHasher.HashPassword(command.Password);
 
-        var createdUser = await _userRepository.CreateAsync(user, cancellationToken);
+        var createdUser = await _userRepository.AddAsync(user, cancellationToken);
         var result = _mapper.Map<CreateUserResult>(createdUser);
         return result;
     }

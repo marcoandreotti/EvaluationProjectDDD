@@ -3,6 +3,7 @@ using Domain.Repositories.Common;
 
 namespace Domain.Repositories;
 
-public interface ISaleRepository : IRepository<Sale>
-{
-}
+/// <summary>
+/// Repository interface for generic entity operations [Sale]
+/// </summary>
+public interface ISaleRepository : IRepository<Sale> { }

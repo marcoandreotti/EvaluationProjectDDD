@@ -1,14 +1,14 @@
+using Application.Common;
 using AutoMapper;
 using Domain.Repositories;
 using FluentValidation;
-using MediatR;
 
 namespace Application.Users.GetUser;
 
 /// <summary>
-/// Handler for processing GetUserCommand requests
+/// Handler for processing GetUserCommand requests inheriting from generic handler
 /// </summary>
-public class GetUserHandler : IRequestHandler<GetUserCommand, GetUserResult>
+public class GetUserHandler : BaseHandler<GetUserCommand, GetUserResult>
 {
     private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
@@ -19,9 +19,7 @@ public class GetUserHandler : IRequestHandler<GetUserCommand, GetUserResult>
     /// <param name="userRepository">The user repository</param>
     /// <param name="mapper">The AutoMapper instance</param>
     /// <param name="validator">The validator for GetUserCommand</param>
-    public GetUserHandler(
-        IUserRepository userRepository,
-        IMapper mapper)
+    public GetUserHandler(IUserRepository userRepository, IMapper mapper) : base(mapper)
     {
         _userRepository = userRepository;
         _mapper = mapper;
@@ -33,7 +31,7 @@ public class GetUserHandler : IRequestHandler<GetUserCommand, GetUserResult>
     /// <param name="request">The GetUser command</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>The user details if found</returns>
-    public async Task<GetUserResult> Handle(GetUserCommand request, CancellationToken cancellationToken)
+    protected override async Task<GetUserResult> HandleRequest(GetUserCommand request, CancellationToken cancellationToken)
     {
         var validator = new GetUserValidator();
         var validationResult = await validator.ValidateAsync(request, cancellationToken);
