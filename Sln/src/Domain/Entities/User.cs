@@ -17,6 +17,12 @@ public class User : BaseEntity, IUser
     /// Gets the user's full name.
     /// Must not be null or empty and should contain both first and last names.
     /// </summary>
+    public string Name { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Gets the user's full name.
+    /// Must not be null or empty and should contain both first and last names.
+    /// </summary>
     public string Username { get; set; } = string.Empty;
 
     /// <summary>

@@ -1,9 +1,11 @@
+using Domain.Contracts;
+
 namespace WebApi.Features.Auth.AuthenticateUserFeature;
 
 /// <summary>
 /// Represents the response returned after user authentication
 /// </summary>
-public sealed class AuthenticateUserResponse
+public sealed class AuthenticateUserResponse: UserContract
 {
     /// <summary>
     /// Gets or sets the JWT token for authenticated user
@@ -11,14 +13,9 @@ public sealed class AuthenticateUserResponse
     public string Token { get; set; } = string.Empty;
 
     /// <summary>
-    /// Gets or sets the user's email address
+    /// Gets or sets the user's unique identifier
     /// </summary>
-    public string Email { get; set; } = string.Empty;
-
-    /// <summary>
-    /// Gets or sets the user's full name
-    /// </summary>
-    public string Name { get; set; } = string.Empty;
+    public Guid Id { get; set; }
 
     /// <summary>
     /// Gets or sets the user's role in the system

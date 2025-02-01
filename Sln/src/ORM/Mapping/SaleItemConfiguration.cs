@@ -20,7 +20,8 @@ public class SaleItemConfiguration : IEntityTypeConfiguration<SaleItem>
                .HasForeignKey(p => p.SaleId)
                .IsRequired(false);
 
-        builder.HasOne(e => e.Product).WithOne().HasForeignKey<Product>(e => e.Id);
+        builder.Property(u => u.ProductId).HasDefaultValueSql("gen_random_uuid()").IsRequired();
+        builder.Property(u => u.ProductName).HasMaxLength(50).IsRequired();
 
         builder.Property(u => u.Quantity).IsRequired();
 

@@ -40,9 +40,11 @@ namespace Application.Auth.AuthenticateUser
 
             return new AuthenticateUserResult
             {
+                Id = user.Id,
                 Token = token,
-                Email = user.Email,
                 Name = user.Username,
+                Username = user.Username,
+                Email = user.Email,
                 Role = user.Role.ToString()
             };
         }

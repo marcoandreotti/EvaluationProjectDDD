@@ -12,7 +12,7 @@ using ORM;
 namespace ORM.Migrations
 {
     [DbContext(typeof(DefaultContext))]
-    [Migration("20250130205627_NewMigration")]
+    [Migration("20250201221821_NewMigration")]
     partial class NewMigration
     {
         /// <inheritdoc />
@@ -25,60 +25,6 @@ namespace ORM.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Domain.Entities.Branch", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasDefaultValueSql("gen_random_uuid()");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Branchs", (string)null);
-                });
-
-            modelBuilder.Entity("Domain.Entities.Customer", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasDefaultValueSql("gen_random_uuid()");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Customers", (string)null);
-                });
-
-            modelBuilder.Entity("Domain.Entities.Product", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasDefaultValueSql("gen_random_uuid()");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
-
-                    b.Property<decimal>("UnitPrice")
-                        .HasColumnType("numeric");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Products", (string)null);
-                });
-
             modelBuilder.Entity("Domain.Entities.Sale", b =>
                 {
                     b.Property<Guid>("Id")
@@ -89,8 +35,18 @@ namespace ORM.Migrations
                     b.Property<Guid>("BranchId")
                         .HasColumnType("uuid");
 
+                    b.Property<string>("BranchName")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)");
+
                     b.Property<Guid>("CustomerId")
                         .HasColumnType("uuid");
+
+                    b.Property<string>("CustomerName")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)");
 
                     b.Property<bool>("IsCancelled")
                         .HasColumnType("boolean");
@@ -123,7 +79,14 @@ namespace ORM.Migrations
                         .HasColumnType("numeric");
 
                     b.Property<Guid>("ProductId")
-                        .HasColumnType("uuid");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
+
+                    b.Property<string>("ProductName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("integer");
@@ -189,33 +152,6 @@ namespace ORM.Migrations
                     b.ToTable("Users", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.Branch", b =>
-                {
-                    b.HasOne("Domain.Entities.Sale", null)
-                        .WithOne("Branch")
-                        .HasForeignKey("Domain.Entities.Branch", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Domain.Entities.Customer", b =>
-                {
-                    b.HasOne("Domain.Entities.Sale", null)
-                        .WithOne("Customer")
-                        .HasForeignKey("Domain.Entities.Customer", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Domain.Entities.Product", b =>
-                {
-                    b.HasOne("Domain.Entities.SaleItem", null)
-                        .WithOne("Product")
-                        .HasForeignKey("Domain.Entities.Product", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Domain.Entities.SaleItem", b =>
                 {
                     b.HasOne("Domain.Entities.Sale", "Sale")
@@ -227,19 +163,7 @@ namespace ORM.Migrations
 
             modelBuilder.Entity("Domain.Entities.Sale", b =>
                 {
-                    b.Navigation("Branch")
-                        .IsRequired();
-
-                    b.Navigation("Customer")
-                        .IsRequired();
-
                     b.Navigation("Items");
-                });
-
-            modelBuilder.Entity("Domain.Entities.SaleItem", b =>
-                {
-                    b.Navigation("Product")
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

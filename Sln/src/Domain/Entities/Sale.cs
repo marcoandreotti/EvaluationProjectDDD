@@ -9,12 +9,12 @@ public class Sale : BaseEntity
     public DateTime SaleDate { get; set; }
 
     public Guid CustomerId { get; set; }
-    public Customer Customer { get; set; }
+    public string CustomerName { get; set; }
 
     public decimal TotalValue { get; private set; }
 
-    public Branch Branch { get; set; }
     public Guid BranchId { get; set; }
+    public string BranchName { get; set; }
 
     public List<SaleItem> Items { get; set; }
     public bool IsCancelled { get; private set; }

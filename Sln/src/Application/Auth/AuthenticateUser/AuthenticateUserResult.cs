@@ -1,9 +1,11 @@
+using Domain.Contracts;
+
 namespace Application.Auth.AuthenticateUser;
 
 /// <summary>
 /// Represents the response after authenticating a user
 /// </summary>
-public sealed class AuthenticateUserResult
+public sealed class AuthenticateUserResult : UserContract
 {
     /// <summary>
     /// Gets or sets the authentication token
@@ -14,21 +16,6 @@ public sealed class AuthenticateUserResult
     /// Gets or sets the user's unique identifier
     /// </summary>
     public Guid Id { get; set; }
-
-    /// <summary>
-    /// Gets or sets the user's name
-    /// </summary>
-    public string Name { get; set; } = string.Empty;
-
-    /// <summary>
-    /// Gets or sets the user's email address
-    /// </summary>
-    public string Email { get; set; } = string.Empty;
-
-    /// <summary>
-    /// Gets or sets the user's phone number
-    /// </summary>
-    public string Phone { get; set; } = string.Empty;
 
     /// <summary>
     /// Gets or sets the user's role

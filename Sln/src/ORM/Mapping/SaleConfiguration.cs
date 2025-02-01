@@ -15,22 +15,17 @@ public class SaleConfiguration : IEntityTypeConfiguration<Sale>
                .HasColumnType("uuid")
                .HasDefaultValueSql("gen_random_uuid()");
 
+        builder.Property(u => u.CustomerId).IsRequired();
+        builder.Property(u => u.CustomerName).HasMaxLength(150).IsRequired();
+
+        builder.Property(u => u.BranchId).IsRequired();
+        builder.Property(u => u.BranchName).HasMaxLength(150).IsRequired();
+
         builder.Property(u => u.SaleNumber).ValueGeneratedOnAdd();
 
         builder.Property(u => u.SaleDate).IsRequired();
 
-        builder.HasOne(e => e.Customer)
-               .WithOne()
-               .HasForeignKey<Customer>(e => e.Id)
-               .IsRequired();
-
         builder.Property(u => u.TotalValue).IsRequired();
-
-        builder.HasOne(e => e.Branch)
-               .WithOne()
-               .HasForeignKey<Branch>(e => e.Id)
-               .IsRequired();
-
 
         builder.Property(u => u.IsCancelled).IsRequired();
     }

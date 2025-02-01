@@ -8,7 +8,7 @@ public class SaleItem : BaseEntity
     public required Sale Sale { get; set; }
 
     public required Guid ProductId { get; set; }
-    public Product Product { get; set; }
+    public string ProductName { get; set; }
 
     public int Quantity { get; set; }
     public decimal UnitPrice { get; set; }
