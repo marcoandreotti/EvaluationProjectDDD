@@ -8,7 +8,7 @@ using FluentValidation;
 namespace Application.Users.CreateUser;
 
 /// <summary>
-/// Handler for processing CreateUserCommand requests inheriting from generic handler
+/// Handler for processing CreateUserCommand requests inheriting from abstract handler
 /// </summary>
 public class CreateUserHandler : BaseHandler<CreateUserCommand, CreateUserResult>
 {

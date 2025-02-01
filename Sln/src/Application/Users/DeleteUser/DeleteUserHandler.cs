@@ -6,7 +6,7 @@ using FluentValidation;
 namespace Application.Users.DeleteUser;
 
 /// <summary>
-/// Handler for processing DeleteUserCommand requests inheriting from generic handler
+/// Handler for processing DeleteUserCommand requests inheriting from abstract handler
 /// </summary>
 public class DeleteUserHandler : BaseHandler<DeleteUserCommand, DeleteUserResponse>
 {

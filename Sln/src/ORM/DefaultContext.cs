@@ -34,7 +34,7 @@ public class YourDbContextFactory : IDesignTimeDbContextFactory<DefaultContext>
 
         builder.UseNpgsql(
                connectionString,
-               b => b.MigrationsAssembly("WebApi")
+               b => b.MigrationsAssembly("ORM")
         );
 
         return new DefaultContext(builder.Options);

@@ -1,9 +1,9 @@
 version: '3.8'
 
 services:
-  WebApi:
-    container_name: webapi
-    image: ${DOCKER_REGISTRY-}webapi
+  evaluation.webApi:
+    container_name: evaluation_webapi
+    image: ${DOCKER_REGISTRY-}evaluationwebapi
     build:
       context: .
       dockerfile: src/WebApi/Dockerfile
@@ -12,16 +12,19 @@ services:
       - ASPNETCORE_HTTP_PORTS=8080
       - ASPNETCORE_HTTPS_PORTS=8081
     ports:
-      - "8080"
-      - "8081"
+      - "8080:8080"
+      - "8081:8081"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+    depends_on:
+      - evaluation.database
+      - evaluation.nosql
+      - evaluation.cache
 
-  DeveloperEvaluation.database:
-    container_name: database
+  evaluation.database:
+    container_name: evaluation_database
     image: postgres:13
-
     environment:
       POSTGRES_DB: developer_evaluation
       POSTGRES_USER: developer
@@ -30,8 +33,8 @@ services:
       - "5432"
     restart: unless-stopped
 
-  DeveloperEvaluation.nosql:
-    container_name: nosql 
+  evaluation.nosql:
+    container_name: evaluation_nosql 
     image: mongo:8.0    
     environment:
         MONGO_INITDB_ROOT_USERNAME: developer
@@ -39,8 +42,8 @@ services:
     ports:
       - "27017"
 
-  DeveloperEvaluation.cache:
-    container_name: cache 
+  evaluation.cache:
+    container_name: evaluation_cache 
     image: redis:7.4.1-alpine     
     command: redis-server --requirepass ev@luAt10n
     environment:

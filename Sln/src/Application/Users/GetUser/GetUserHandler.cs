@@ -6,7 +6,7 @@ using FluentValidation;
 namespace Application.Users.GetUser;
 
 /// <summary>
-/// Handler for processing GetUserCommand requests inheriting from generic handler
+/// Handler for processing GetUserCommand requests inheriting from abstract handler
 /// </summary>
 public class GetUserHandler : BaseHandler<GetUserCommand, GetUserResult>
 {
